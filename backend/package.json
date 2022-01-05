@@ -1,0 +1,26 @@
+{
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "express": "^4.17.2",
+    "mongoose": "^6.1.4",
+    "mongoose-unique-validator": "^3.0.0",
+    "nodemon": "^2.0.15"
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "name": "backend",
+  "version": "1.0.0",
+  "main": "server.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tardmonkey/GuillainBENOIST_6_251221.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tardmonkey/GuillainBENOIST_6_251221/issues"
+  },
+  "homepage": "https://github.com/tardmonkey/GuillainBENOIST_6_251221#readme",
+  "description": ""
+}
