@@ -4,6 +4,10 @@ const router = express.Router()
 
 const sCtrl = require('../controllers/sauceController')
 
+const auth = require('../middleware/auth');
+
+const multer = require('../middleware/multer-config');
+
 
 router.post('/', sCtrl.createSauce)
 

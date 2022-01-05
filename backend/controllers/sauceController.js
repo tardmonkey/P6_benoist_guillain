@@ -53,11 +53,37 @@ exports.updateSauce = (req,res, next) => {
 }
 
   // Supprime la sauce avec l'_id fourni
-exports.deleteSauce = (req,res, next) => {
-    Sauce.deleteOne({ _id: req.params.id })
-    .then(() => res.status(200).json({ message: 'Objet supprimé !'}))
-    .catch(error => res.status(400).json({ error }));
-}
+  //  Trouver la sauce si elle existe, puis vérifie qu'elle appartient bien à
+  //l'utilisateur
+  exports.deleteSauce = (req, res, next) => {
+    Thing.findOne({ _id: req.params.id }).then(
+      (thing) => {
+        if (!thing) {
+          res.status(404).json({
+            error: new Error('No such Thing!')
+          });
+        }
+        if (thing.userId !== req.auth.userId) {
+          res.status(400).json({
+            error: new Error('Unauthorized request!')
+          });
+        }
+        Thing.deleteOne({ _id: req.params.id }).then(
+          () => {
+            res.status(200).json({
+              message: 'Deleted!'
+            });
+          }
+        ).catch(
+          (error) => {
+            res.status(400).json({
+              error: error
+            });
+          }
+        );
+      }
+    )
+  };
 
 
   // Définit le statut « Like » pour l' userId fourni. Si like = 1, l'utilisateur aime (= like) la sauce. Si like = 0, l'utilisateur annule son like ou son
