@@ -4,10 +4,16 @@ const mongoose = require("mongoose")
 
 const Sauce = require('./models/Sauce')
 
+const path = require('path');
+
 //appel du routeur
 const sauceRoutes = require('./routes/sauces')
-const authRoutes = require("./routes/auth")
+const utilisateurRoutes = require("./routes/utilisateur")
+
+
 const app = express()
+
+app.use(express.json());
 
 //CORS
 //  CORS
@@ -19,11 +25,12 @@ app.use((req, res, next) => {
   next();
 })
 
-//routes qui renvoient vers les routeurs
+//Routes qui renvoient vers les routeurs
 app.use('/api/sauces', sauceRoutes)
-app.use("/api/auth", authRoutes)
+app.use("/api/auth", utilisateurRoutes)
+//Route pour images
+app.use('/images', express.static(path.join(__dirname, 'images')));
 
-app.use(express.json());
 
 
 

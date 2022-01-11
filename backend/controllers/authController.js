@@ -7,9 +7,8 @@ const jwt = require("jsonwebtoken")
 // Hachage du mot de passe de l'utilisateur, ajout de
 // l'utilisateur à la base de données.
 exports.signup = (req, res, next) => {
-
   bcrypt.hash(req.body.password, 10)
-    .then(hash => {
+    .then(hash => { 
       const user = new Utilisateur({
         email: req.body.email,
         password: hash
@@ -27,7 +26,7 @@ exports.signup = (req, res, next) => {
   // depuis la base de données   et un token web JSON signé
   // (contenant également l'_id  de l'utilisateur).
   exports.login = (req, res, next) => {
-    User.findOne({ email: req.body.email })
+    Utilisateur.findOne({ email: req.body.email })
       .then(user => {
         if (!user) {
           return res.status(401).json({ error: 'Utilisateur non trouvé !' });
